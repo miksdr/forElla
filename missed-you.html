@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>For Shella</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f3e5f5;
+      color: #4a148c;
+      text-align: center;
+      padding: 80px 20px;
+      overflow-y: auto; /* 👈 This allows vertical scrolling */
+    }
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 30px;
+      opacity: 0;
+      animation: fadeIn 2s ease forwards;
+    }
+    #message {
+      font-size: 1.4em;
+      max-width: 700px;
+      margin: 0 auto;
+      white-space: pre-wrap;
+      border-radius: 10px;
+      padding: 20px;
+      background-color: #ede7f6;
+      box-shadow: 0 0 10px rgba(74, 20, 140, 0.2);
+      opacity: 0;
+      animation: fadeIn 3s ease forwards;
+      animation-delay: 2s;
+    }
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <h1>💌 Just for You 💌</h1>
+  <div id="message"></div>
+
+  <script>
+    const text = `Hi love,\n\nI know we haven’t met yet, but I already admire so much about you. You’re amazing in everything you do.\n\nI know life can be tiring sometimes. You might feel overwhelmed, or sad, or just not like yourself. And when that happens, I want you to remember this:\n\nI’m here. I care. And I’m not going anywhere.\n\nYou don’t have to be perfect. You don’t have to pretend. You’re already enough. More than enough.\n\nAlso, if I were beside you right now, I’d probably be holding your hand and whispering something sweet... or maybe something dirty. Kidding! \n\nBut seriously, thank you for existing, thank you for being you. \n\n\n Always, Brio`;
+
+    let i = 0;
+    const speed = 40;
+    const messageBox = document.getElementById("message");
+
+    function typeWriter() {
+      if (i < text.length) {
+        messageBox.innerText += text.charAt(i);
+        i++;
+        setTimeout(typeWriter, speed);
+      }
+    }
+
+    setTimeout(typeWriter, 2000);
+  </script>
+</body>
+</html>

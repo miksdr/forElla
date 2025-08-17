@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Do You Miss Me?</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f3e5f5;
+      color: #4a148c;
+      text-align: center;
+      padding-top: 100px;
+      overflow: hidden;
+      position: relative;
+    }
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 40px;
+    }
+    .button-container {
+      display: inline-flex;
+      gap: 20px;
+      justify-content: center;
+      align-items: center;
+    }
+    button {
+      font-size: 1.2em;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+    #yesBtn {
+      background-color: #ce93d8;
+      color: #fff;
+    }
+    #noBtn {
+      background-color: #d1c4e9;
+      color: #4a148c;
+    }
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: #ec407a;
+      transform: rotate(45deg);
+      animation: floatUp 2s ease-out forwards;
+    }
+    .heart::before,
+    .heart::after {
+      content: "";
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: #ec407a;
+      border-radius: 50%;
+    }
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+    .heart::after {
+      left: -10px;
+      top: 0;
+    }
+    @keyframes floatUp {
+      0% { opacity: 1; transform: translateY(0) scale(1); }
+      100% { opacity: 0; transform: translateY(-150px) scale(1.5); }
+    }
+    .sparkle {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background: #ba68c8;
+      border-radius: 50%;
+      animation: sparkle 1s linear infinite;
+    }
+    @keyframes sparkle {
+      0% { transform: scale(1); opacity: 1; }
+      100% { transform: scale(2); opacity: 0; }
+    }
+    #message {
+      font-size: 1.5em;
+      margin-top: 40px;
+      opacity: 0;
+      transition: opacity 1s ease;
+    }
+  </style>
+</head>
+<body>
+  <h1>Do you miss me?</h1>
+  <div class="button-container">
+    <button id="yesBtn">Yes</button>
+    <button id="noBtn">No</button>
+  </div>
+  <div id="message">I missed you too</div>
+
+  <script>
+    const yesBtn = document.getElementById("yesBtn");
+    const noBtn = document.getElementById("noBtn");
+    const message = document.getElementById("message");
+    let clickCount = 0;
+
+    // YES button effects
+    yesBtn.onclick = function() {
+      message.style.opacity = 1;
+
+      for (let i = 0; i < 20; i++) {
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.style.left = `${Math.random() * window.innerWidth}px`;
+        heart.style.top = `${window.innerHeight}px`;
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 2000);
+      }
+
+      setTimeout(() => {
+        window.location.href = "missed-you.html"; // Update with your actual page
+      }, 3000);
+    };
+
+    // NO button playful behavior
+    noBtn.addEventListener("mouseover", () => {
+      const x = Math.random() * (window.innerWidth - 100);
+      const y = Math.random() * (window.innerHeight - 100);
+      noBtn.style.position = "absolute";
+      noBtn.style.left = `${x}px`;
+      noBtn.style.top = `${y}px`;
+
+      for (let i = 0; i < 5; i++) {
+        const sparkle = document.createElement("div");
+        sparkle.className = "sparkle";
+        sparkle.style.left = `${x + Math.random() * 50}px`;
+        sparkle.style.top = `${y + Math.random() * 50}px`;
+        document.body.appendChild(sparkle);
+        setTimeout(() => sparkle.remove(), 1000);
+      }
+    });
+
+    noBtn.addEventListener("click", () => {
+      clickCount++;
+      if (clickCount === 1) {
+        noBtn.innerText = "Are you sure?";
+      } else if (clickCount === 2) {
+        noBtn.innerText = "Really?";
+      } else if (clickCount === 3) {
+        noBtn.innerText = "Okay fine!";
+        const msg = document.createElement("p");
+        msg.innerText = "But I know you miss me. Just click Yes!";
+        document.body.appendChild(msg);
+      } else {
+        noBtn.innerText = "Click Yes already!";
+      }
+    });
+  </script>
+</body>
+</html>
